@@ -1,9 +1,13 @@
-import useProfile from "../hooks/ProfileHook";
+import InputPost from "../components/InputPost";
+import PostList from "../components/PostList";
 
 function Home() {
-  const { profiles } = useProfile();
-  console.log(profiles);
-  return <div>Home</div>;
+  return (
+    <div>
+      <InputPost />
+      <PostList />
+    </div>
+  );
 }
 
 export default Home;

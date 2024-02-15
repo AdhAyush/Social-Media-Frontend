@@ -11,8 +11,7 @@
         "followers": 0,
         "following": 0,
         "image": ""
-      },
-      "posts": []
+      }
     },
     {
       "id": "db23",
@@ -25,6 +24,28 @@
         "followers": 0,
         "following": 0,
         "image": ""
+      }
+    }
+  ],
+  "posts": [
+    {
+      "id": "14c2",
+      "post": {
+        "text": "Nothing much\n",
+        "image": null,
+        "likes": 0,
+        "comments": []
+      }
+    },
+    {
+      "id": "46cd",
+      "post": {
+        "text": "Today was my assessment of electric machines.\nWe arrived on time only to find out that the assessment was cancelled.",
+        "image": null,
+        "likes": 0,
+        "comments": [
+          {}
+        ]
       }
     }
   ]

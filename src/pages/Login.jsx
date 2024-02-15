@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link, useNavigate } from "react-router-dom"; // Import Link from react-router-dom
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,6 +18,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // You can handle form submission logic here
+    navigate("/home");
   };
 
   return (

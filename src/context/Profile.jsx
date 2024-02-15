@@ -1,4 +1,4 @@
-import { createContext, useState, useCallback } from "react";
+import { createContext, useState, useCallback, useEffect } from "react";
 import axios from "axios";
 
 const ProfileContext = createContext();
@@ -13,6 +13,17 @@ function Provider({ children }) {
     setProfiles(response.data);
   }, []);
 
+  const getPosts = useCallback(async (id) => {
+    const response = await axios.get(`http://localhost:3001/posts`);
+
+    setPosts(response.data);
+  });
+
+  useEffect(() => {
+    fetchProfile("db23");
+    getPosts();
+  }, []);
+
   //Create Profile logic
   const createProfile = async (data) => {
     const response = await axios.post("http://localhost:3001/profiles/", {
@@ -24,10 +35,10 @@ function Provider({ children }) {
   };
 
   const createPost = async (post) => {
-    const response = await axios.post("http://localhost:3001/profiles/posts/", {
+    const response = await axios.post("http://localhost:3001/posts/", {
       post,
     });
-    const updatedPost = [...profiles, response.data];
+    const updatedPost = [...posts, response.data];
     setPosts(updatedPost);
   };
 
@@ -37,6 +48,7 @@ function Provider({ children }) {
     createProfile,
     createPost,
     profiles,
+    posts,
   };
 
   return (
