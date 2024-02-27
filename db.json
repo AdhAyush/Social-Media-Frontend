@@ -44,7 +44,28 @@
         "image": null,
         "likes": 0,
         "comments": [
-          {}
+          
+        ]
+      }
+    },
+    {
+      "id": "b46b",
+      "post": {
+        "text": "nothing in my mind\n",
+        "image": null,
+        "likes": 0,
+        "comments": [
+        ]
+      }
+    },
+    {
+      "id": "4b38",
+      "post": {
+        "text": "i bunked my class today",
+        "image": null,
+        "likes": 0,
+        "comments": [
+          
         ]
       }
     }

@@ -7,7 +7,7 @@ const InputPost = () => {
     text: "",
     image: null,
     likes: 0,
-    comments: [{}],
+    comments: [],
   });
 
   const handlePostTextChange = (e) => {

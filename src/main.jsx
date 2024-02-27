@@ -7,6 +7,7 @@ import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import Layout from "./components/Layout.jsx";
+import ShowProfile from "./pages/ShowProfile.jsx";
 
 import "./index.css";
 import { Provider } from "./context/Profile.jsx";
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <Signup />,
+      },
+      {
+        path: "profile/:id",
+        element: <ShowProfile />,
       },
     ],
   },
