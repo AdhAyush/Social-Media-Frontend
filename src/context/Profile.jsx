@@ -6,6 +6,7 @@ const ProfileContext = createContext();
 function Provider({ children }) {
   const [profiles, setProfiles] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [suggestions, setSuggestions] = useState([{ id: 5, name: "JB" }]);
 
   const fetchProfile = useCallback(async (id) => {
     const response = await axios.get(`http://localhost:3001/profiles/${id}`);
@@ -19,9 +20,17 @@ function Provider({ children }) {
     setPosts(response.data);
   });
 
+  //Get Friend Suggestions
+  const getSugg = async () => {
+    const response = await axios.get("");
+
+    setSuggestions(response.data);
+  };
+
   useEffect(() => {
     fetchProfile("db23");
     getPosts();
+    // getSugg();
   }, []);
 
   //Create Profile logic
@@ -42,6 +51,14 @@ function Provider({ children }) {
     setPosts(updatedPost);
   };
 
+  //Follow logic
+  const follow = async (id) => {
+    console.log("Follow called for id:", id);
+    // const response = await axios.post("", {
+    //   id,
+    // });
+  };
+
   //Shared data and functions
   const valuetoShare = {
     fetchProfile,
@@ -49,6 +66,8 @@ function Provider({ children }) {
     createPost,
     profiles,
     posts,
+    suggestions,
+    follow,
   };
 
   return (
