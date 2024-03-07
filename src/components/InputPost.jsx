@@ -30,13 +30,8 @@ const InputPost = () => {
         getDownloadURL(snapshot.ref)
           .then((downloadURL) => {
             setPost({ ...post, imageUrl: downloadURL });
-          })
-          .then(() => {
-            console.log("The url is", post.imageUrl);
-            // console.log("File available at", downloadURL);
-            console.log("creating post");
-            createPost(post.body, post.imageUrl, post.likes);
-            console.log(post);
+            // Move createPost call inside this block
+            createPost(post.body, downloadURL, post.likes);
           })
           .catch((error) => {
             // Handle any errors that occur while retrieving the download URL
@@ -51,12 +46,13 @@ const InputPost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    uploadImage();
+    await uploadImage();
     setPost({
       body: "",
       image: "",
       likes: 0,
     });
+    setImageUpload(null);
   };
 
   return (
@@ -65,7 +61,7 @@ const InputPost = () => {
         <textarea
           className="w-full h-16 px-4 py-2 bg-gray-100 border-b border-gray-300 focus:outline-none"
           placeholder="What's on your mind?"
-          value={post.text}
+          value={post.body}
           onChange={handlePostTextChange}
         ></textarea>
         <input
@@ -73,11 +69,8 @@ const InputPost = () => {
           onChange={(event) => {
             setImageUpload(event.target.files[0]);
           }}
-          className="block p-2 w-full bg-gray-100 border-t border-gray-300 focus:outline-none"
+          className="block p-2 w-full bg-gray-100 border-t border-gray-300 focus:outline-none "
         />
-        {/* <button className="rounded bg-blue-500" onClick={uploadImage}>
-          Post image
-        </button> */}
         <div className="flex justify-between items-center px-4 py-2 bg-gray-100">
           <button
             type="submit"

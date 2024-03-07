@@ -4,14 +4,12 @@ import { FaRegComments } from "react-icons/fa";
 function PostShow({ post }) {
   return (
     <>
-      <div className="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden my-8">
+      <div className="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden p-2 my-8">
+        <p className="text-gray-800 text-base mb-2 text-justify">{post.body}</p>
         {/* Post Image */}
         post image
         {/* {post.post.image && <div>image</div>} */}
         <div className="px-4 py-2">
-          <p className="text-gray-800 text-base mb-2 text-justify">
-            {post.body}
-          </p>
           <div className="flex justify-around items-center border-t-2 p-2">
             <button className="flex items-center">
               <GiSelfLove size={20} />

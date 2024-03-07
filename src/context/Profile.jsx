@@ -94,7 +94,8 @@ function Provider({ children }) {
 
         {
           params: {
-            email: "ayushadhikari@gmail.com",
+            // email: "ayushadhikari@gmail.com",
+            email: email,
           },
         }
       );
@@ -164,7 +165,8 @@ function Provider({ children }) {
     console.log(body, imageUrl, likes);
     try {
       const response = await axios.post("http://127.0.0.1:8000/createpost", {
-        email: "ayush@gmail.com",
+        // email: "ayush@gmail.com",
+        email,
         body,
         imageUrl,
         likes,
@@ -237,7 +239,8 @@ function Provider({ children }) {
 
         {
           params: {
-            email: "ayush@gmail.com",
+            // email: "ayush@gmail.com",
+            email: email,
           },
         }
       );
@@ -270,7 +273,8 @@ function Provider({ children }) {
 
         {
           params: {
-            email: "jb@jb.com",
+            // email: "jb@jb.com",
+            email: email,
           },
         }
       );

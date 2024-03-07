@@ -34,7 +34,7 @@ const Friends = () => {
             Friend Requests
           </h1>
           {loading ? (
-            <div>Loading...</div>
+            <div className="text-xl text-white">Loading...</div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {fRequests.map((fRequest) => (
@@ -76,7 +76,7 @@ const Friends = () => {
             Friend List
           </h1>
           {loading ? (
-            <div>Loading...</div>
+            <div className="text-xl text-white">Loading...</div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {friends.map((friend) => (
