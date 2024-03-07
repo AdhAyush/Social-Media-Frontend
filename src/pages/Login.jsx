@@ -4,7 +4,7 @@ import useProfile from "../hooks/ProfileHook";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { email, Login } = useProfile();
+  const { email, Login, isLoggedSuccessfully } = useProfile();
 
   const [user, setUser] = useState({ email: "", password: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,14 +22,17 @@ const Login = () => {
     if (!isLoggedIn) {
       setIsLoggedIn(true);
     }
-    Login(user.email);
+    Login(user.email, user.password);
+    if (isLoggedSuccessfully) {
+      navigate("/home");
+    }
   };
 
   useEffect(() => {
     console.log("Here email is");
-    if (email != "") {
-      navigate("/home");
-    }
+    // if (email != "") {
+    //   navigate("/home");
+    // }
     if (isLoggedIn) {
       navigate("/home");
     }

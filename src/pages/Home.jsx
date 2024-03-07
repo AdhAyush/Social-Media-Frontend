@@ -28,7 +28,6 @@ function Home() {
           <Navbar />
           <div className="flex flex-row w-full justify-center mt-16">
             <div className="invisible md:visible">
-              {" "}
               <LeftSidebar />
             </div>
             <div className=" w-3/5">

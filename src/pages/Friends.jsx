@@ -55,13 +55,14 @@ const Friends = () => {
                           // Update accept status to true for this friend request
                           setAcceptStatus((prevStatus) => ({
                             ...prevStatus,
-                            [fRequest]: true,
+                            [fRequest.id]: true, // Use fRequest.id as the key
                           }));
                         }}
                         // Disable the button if accept status is true
-                        disabled={acceptStatus[fRequest]}
+                        disabled={acceptStatus[fRequest.id]} // Use fRequest.id to check status
                       >
-                        {acceptStatus[fRequest] ? "Accepted" : "Accept"}
+                        {acceptStatus[fRequest.id] ? "Accepted" : "Accept"}{" "}
+                        {/* Use fRequest.id to check status */}
                       </button>
                     </div>
                   </div>

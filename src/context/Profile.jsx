@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useState,
-  useCallback,
-  useEffect,
-  useReducer,
-} from "react";
+import { createContext, useState, useCallback, useEffect } from "react";
 import axios from "axios";
 
 const ProfileContext = createContext();
@@ -38,15 +32,37 @@ function Provider({ children }) {
     // console.log("EMail set", email);
   };
 
-  const Login = (email) => {
-    setEmail(email);
+  const Login = async (email, password) => {
+    try {
+      console.log(email);
+      const response = await axios.get(
+        `http://127.0.0.1:8000/suggestfriends`,
+
+        {
+          params: {
+            email: email,
+            password: password,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("Login response", response.data);
+        setIsLoggedSuccessfully(true);
+      } else {
+        throw new Error("Failed to fetch friend suggestions");
+      }
+    } catch (error) {
+      console.error("Error fetching friend suggestions:", error.message);
+      return []; // Return an empty array in case of an error
+    }
   };
 
-  const fetchProfile = useCallback(async (id) => {
-    const response = await axios.get(`http://localhost:3001/profiles/${id}`);
+  // const fetchProfile = useCallback(async (id) => {
+  //   const response = await axios.get(`http://localhost:3001/profiles/${id}`);
 
-    setProfiles(response.data);
-  }, []);
+  //   setProfiles(response.data);
+  // }, []);
 
   const getPosts = useCallback(async (id) => {
     try {
@@ -84,13 +100,13 @@ function Provider({ children }) {
       );
 
       if (response.status === 200) {
-        console.log("Sugg", response.data);
+        // console.log("Sugg", response.data);
         const array = Object.entries(response.data).map(([key, value]) => ({
           key,
           value,
         }));
 
-        console.log(array);
+        // console.log(array);
         setSuggestions(array);
       } else {
         throw new Error("Failed to fetch friend suggestions");
@@ -108,6 +124,7 @@ function Provider({ children }) {
       localStorage.setItem("EMAIL", JSON.stringify(email));
       getPosts();
       getSugg();
+      getFriendReq();
     }
   }, [email, isLoggedSuccessfully]);
 
@@ -274,7 +291,7 @@ function Provider({ children }) {
 
   //Shared data and functions
   const valuetoShare = {
-    fetchProfile,
+    // fetchProfile,
     createProfile,
     createPost,
     profiles,
