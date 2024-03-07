@@ -25,6 +25,14 @@
         "following": 0,
         "image": ""
       }
+    },
+    {
+      "id": "6d4d",
+      "data": {
+        "Name": "a",
+        "email": "jbjbjbaaa@gmail.com",
+        "password": "asd"
+      }
     }
   ],
   "posts": [
@@ -43,9 +51,7 @@
         "text": "Today was my assessment of electric machines.\nWe arrived on time only to find out that the assessment was cancelled.",
         "image": null,
         "likes": 0,
-        "comments": [
-          
-        ]
+        "comments": []
       }
     },
     {
@@ -54,8 +60,7 @@
         "text": "nothing in my mind\n",
         "image": null,
         "likes": 0,
-        "comments": [
-        ]
+        "comments": []
       }
     },
     {
@@ -64,9 +69,7 @@
         "text": "i bunked my class today",
         "image": null,
         "likes": 0,
-        "comments": [
-          
-        ]
+        "comments": []
       }
     }
   ]

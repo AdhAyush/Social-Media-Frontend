@@ -1,35 +1,66 @@
 import React, { useState } from "react";
 import useProfile from "../hooks/ProfileHook";
+// import firebase from "firebase/app";
+// import "firebase/storage";
+import { v4 } from "uuid";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
+import { storage } from "../firebase/firBase";
 
 const InputPost = () => {
-  const { posts, createPost } = useProfile();
+  const { email, Login, createPost } = useProfile();
+  const [imageUpload, setImageUpload] = useState(null);
   const [post, setPost] = useState({
-    text: "",
-    image: null,
+    body: "",
+    imageUrl: "",
     likes: 0,
-    comments: [],
   });
 
   const handlePostTextChange = (e) => {
-    setPost({ ...post, text: e.target.value });
+    setPost({ ...post, body: e.target.value });
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setPost({ ...post, image: file });
+  const uploadImage = async () => {
+    if (imageUpload == null) {
+      return;
+    }
+    const imageRef = ref(storage, `images/${v4()}`);
+    await uploadBytes(imageRef, imageUpload)
+      .then((snapshot) => {
+        getDownloadURL(snapshot.ref)
+          .then((downloadURL) => {
+            setPost({ ...post, imageUrl: downloadURL });
+          })
+          .then(() => {
+            console.log("The url is", post.imageUrl);
+            // console.log("File available at", downloadURL);
+            console.log("creating post");
+            createPost(post.body, post.imageUrl, post.likes);
+            console.log(post);
+          })
+          .catch((error) => {
+            // Handle any errors that occur while retrieving the download URL
+            console.error("Error getting download URL:", error);
+          });
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the upload process
+        console.error("Error uploading image:", error);
+      });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    createPost(post);
-
-    // Clear the post text and image after submitting
-    setPost({ text: "", image: null });
+    uploadImage();
+    setPost({
+      body: "",
+      image: "",
+      likes: 0,
+    });
   };
 
   return (
-    <div className="max-w-lg w-full bg-white shadow-md rounded-lg overflow-hidden mx-auto mb-8 mt-4">
+    <div className="max-w-md w-full bg-white shadow-md rounded-lg overflow-hidden mx-auto mb-8 mt-4">
       <form onSubmit={handleSubmit}>
         <textarea
           className="w-full h-16 px-4 py-2 bg-gray-100 border-b border-gray-300 focus:outline-none"
@@ -37,12 +68,16 @@ const InputPost = () => {
           value={post.text}
           onChange={handlePostTextChange}
         ></textarea>
-        {/* <input
+        <input
           type="file"
-          accept="image/*"
-          onChange={handleImageChange}
+          onChange={(event) => {
+            setImageUpload(event.target.files[0]);
+          }}
           className="block p-2 w-full bg-gray-100 border-t border-gray-300 focus:outline-none"
-        /> */}
+        />
+        {/* <button className="rounded bg-blue-500" onClick={uploadImage}>
+          Post image
+        </button> */}
         <div className="flex justify-between items-center px-4 py-2 bg-gray-100">
           <button
             type="submit"

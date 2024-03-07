@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-10  m-2 text-md font-bold text-purple-500">
-      <ul className="bg-slate-300 p-4 rounded-md w-2/3 mx-auto flex justify-around">
+    <nav className="fixed top-0 left-0 right-0 z-10 w-2/3  m-2 mx-auto text-md font-bold text-purple-500">
+      <ul className="bg-slate-300 p-4 rounded-md w-full mx-auto flex justify-around">
         <li>
           <NavLink
             to="/home"

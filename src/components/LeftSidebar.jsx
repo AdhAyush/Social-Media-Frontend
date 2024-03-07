@@ -8,10 +8,10 @@ const LeftSidebar = () => {
   };
 
   return (
-    <div className="fixed left-4 top-16 w-1/4 p-4">
+    <div className="fixed left-4 top-16  p-4">
       {/* Button to show/hide sidebar on small screens */}
       <button
-        className="fixed top-4 left-4 bg-gray-800 text-white px-4 py-2 rounded-md md:hidden"
+        className="fixed top-4 left-4  text-white px-4 py-2 rounded-md md:hidden"
         onClick={toggleSidebar}
       >
         {showSidebar ? "Hide Sidebar" : "Show Sidebar"}
