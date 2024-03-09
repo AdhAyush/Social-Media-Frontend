@@ -31,7 +31,7 @@ const InputPost = () => {
           .then((downloadURL) => {
             setPost({ ...post, imageUrl: downloadURL });
             // Move createPost call inside this block
-            createPost(post.body, downloadURL, post.likes);
+            createPost(post.body, downloadURL, post.likes , imageUpload.type.split("/")[0]);
           })
           .catch((error) => {
             // Handle any errors that occur while retrieving the download URL

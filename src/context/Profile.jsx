@@ -19,6 +19,7 @@ function Provider({ children }) {
   const [suggestions, setSuggestions] = useState();
   const [UID, setUID] = useState("");
   const [email, setEmail] = useState(getLocalEmail);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [friends, setFriends] = useState([]);
@@ -36,7 +37,7 @@ function Provider({ children }) {
     try {
       console.log(email);
       const response = await axios.get(
-        `http://127.0.0.1:8000/suggestfriends`,
+        `http://127.0.0.1:8000/login`,
 
         {
           params: {
@@ -47,7 +48,9 @@ function Provider({ children }) {
       );
 
       if (response.status === 200) {
+        const userEmail = response.data.email;
         console.log("Login response", response.data);
+        setEmail(userEmail);
         setIsLoggedSuccessfully(true);
       } else {
         throw new Error("Failed to fetch friend suggestions");
@@ -66,7 +69,14 @@ function Provider({ children }) {
 
   const getPosts = useCallback(async (id) => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/suggestposts`);
+      const response = await axios.get(`http://127.0.0.1:8000/suggestposts`,
+      {
+        params: {
+          // email: "adhikariayush923@gmail.com",
+          email: email,
+        },
+      })
+      ;
 
       if (response.status === 200) {
         setLoading(false);
@@ -107,8 +117,13 @@ function Provider({ children }) {
           value,
         }));
 
+
+        let objData = response.data;
+        let arrData = Object.values(objData);
+
+
         // console.log(array);
-        setSuggestions(array);
+        setSuggestions(arrData);
       } else {
         throw new Error("Failed to fetch friend suggestions");
       }
@@ -161,8 +176,8 @@ function Provider({ children }) {
     //   });
   };
 
-  const createPost = async (body, imageUrl, likes) => {
-    console.log(body, imageUrl, likes);
+  const createPost = async (body, imageUrl, likes , fileType) => {
+    console.log(body, imageUrl, likes, fileType);
     try {
       const response = await axios.post("http://127.0.0.1:8000/createpost", {
         // email: "ayush@gmail.com",
@@ -170,6 +185,7 @@ function Provider({ children }) {
         body,
         imageUrl,
         likes,
+        fileType,
       });
       // console.log("The response is ", response.data);
 
