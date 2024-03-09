@@ -35,10 +35,10 @@ import { FaRegComments } from "react-icons/fa";
 
 function PostShow({ post }) {
   return (
-    <div className="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden p-2 my-8">
+    <div className="max-w-xl mx-auto bg-white shadow-md rounded-lg overflow-hidden p-2 my-8">
       {/*display user's name and profile image*/}
       <div className="flex items-center mb-2 border-b-2 border-orange-500 pb-2">
-        <img src={post.img} alt="User" className="w-8 h-8 rounded-full mr-2" />
+        <img src={post.pic} alt="User" className="w-8 h-8 rounded-full mr-2" />
         <p className="text-orange-500 font-bold text-base hover:text-blue-500">{post.user_name}</p>
       </div>
 

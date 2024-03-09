@@ -122,8 +122,9 @@ function RightSidebar() {
   };
 
   return (
-    <div className="fixed right-4 top-16 m-2 p-2 rounded-md w-1/4">
-      {/* Friend Requests */}
+    <div className=" right-4 top-40 p-4 w-full">
+       {/* Friend Requests  */}
+       <h3 className="text-white text-xl mb-2">Friend Requests</h3> {/* Updated font size and color */}
       {fRequests &&
         fRequests.map((request) => (
           <div
@@ -152,7 +153,9 @@ function RightSidebar() {
           </div>
         ))}
 
-      {/* Friend Suggestions */}
+<div className="mb-10"></div>
+
+<h3 className="text-white text-xl mb-2">Friend Suggestions</h3> {/* Updated font size and color */}
       {suggestions &&
         suggestions.map((friend) => (
           <div
