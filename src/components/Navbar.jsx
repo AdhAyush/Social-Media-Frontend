@@ -2,14 +2,19 @@ import { NavLink } from "react-router-dom";
 import useProfile from "../hooks/ProfileHook";
 
 function Navbar() {
-  const { getPosts , getTimelinePosts} = useProfile();
+  const { getPosts , getTimelinePosts, getSugg, getFriendReq} = useProfile();
 
 
   const handleHomeClick = () => {
-    getPosts(); // Refresh posts when Home link is clicked
+    getPosts();
+    getFriendReq();
+    getSugg();
+     // Refresh posts when Home link is clicked
   };
   const handleProfileClick = () => {
-    getTimelinePosts(); // Refresh posts when Home link is clicked
+    getTimelinePosts();
+    getFriendReq();
+    getSugg(); // Refresh posts when Home link is clicked
   };
 
 

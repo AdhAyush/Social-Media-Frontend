@@ -21,7 +21,7 @@ function Provider({ children }) {
   const [suggestions, setSuggestions] = useState();
   const [UID, setUID] = useState("");
   const [email, setEmail] = useState(getLocalEmail);
-  const [name, setName] = useState("Ayush");
+  const [name, setName] = useState("");
   const [profilepic, setProfilePic] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -55,9 +55,11 @@ function Provider({ children }) {
       );
 
       if (response.status === 200) {
+        
         const userEmail = response.data.email;
         console.log("Login response", response.data);
         setEmail(userEmail);
+        console.log(response.data.displayName, response.data.pic, response.data.uid)
         setName(response.data.displayName);
         setUID(response.data.uid);
         setProfilePic(response.data.pic);
